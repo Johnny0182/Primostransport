@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .slideshow-container {
+            width: 100%;
+            height: 33vh;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px; /* Increased space below slideshow */
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .intro {
+            margin-bottom: 40px; /* Increased space below intro */
+        }
+        .intro p {
+            font-size: 1.2em; /* Increased paragraph font size */
+            line-height: 1.6; /* Improved readability */
+        }
+        .contact-button {
+            display: block;
+            width: 200px;
+            margin: 40px auto; /* Increased space around button */
+            padding: 15px; /* Slightly larger button */
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em; /* Slightly larger text */
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slide active"><img src="/api/placeholder/1200/400" alt="Slide 1"></div>
+        <div class="slide"><img src="/api/placeholder/1200/400" alt="Slide 2"></div>
+        <div class="slide"><img src="/api/placeholder/1200/400" alt="Slide 3"></div>
+    </div>
+
+    <div class="content">
+        <div class="intro">
+            <h1>Welcome to Primos Transport</h1>
+            <p>Primos Transport is an independent mail courier company based in Los Angeles, California, specializing in efficient and reliable delivery services. As a privately owned entity, it prides itself on a personalized approach to logistics, ensuring that each client receives tailored solutions that meet their specific needs. The company operates with a commitment to safety and timely deliveries, leveraging a network of experienced couriers to navigate the complexities of urban transport. By focusing on customer satisfaction, Primos Transport has established a reputation for excellence within the competitive courier industry. Their dedication to service and operational efficiency makes them a trusted partner for businesses requiring dependable mail delivery solutions.</p>
+        </div>
+        <a href="https://www.primostransport.com" class="contact-button">Contact Us Now</a>
+    </div>
+
+    <footer>
+        <p>Email: admin@primostransport.com | Phone: (323) 239-9960 | Website: <a href="https://www.primostransport.com">www.primostransport.com</a></p>
+        <p>&copy; 2024 Primos Transport. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    </script>
+</body>
+</html>
