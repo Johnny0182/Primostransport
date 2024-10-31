@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Company</title>
+    <title>Primos Transport</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,49 +12,119 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background-color: cornflowerblue; /* Set background to cornflower blue */
         }
+
         .slideshow-container {
             width: 100%;
-            height: 33vh;
+            max-width: 1200px;
+            height: 400px;
             position: relative;
             overflow: hidden;
-            margin-bottom: 40px; /* Increased space below slideshow */
+            margin: 0 auto 40px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         .slide {
             width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            z-index: 1;
         }
+
         .slide.active {
             opacity: 1;
+            z-index: 2;
         }
+
+        .slideshow-container img {
+            width: 100%;
+            max-width: 1200px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Arrow styling */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 3;
+            transition: background-color 0.3s;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .slideshow-container {
+                height: 250px;
+            }
+            .slideshow-container img {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slideshow-container {
+                height: 180px;
+            }
+            .slideshow-container img {
+                height: 180px;
+            }
+        }
+
         .content {
             padding: 20px;
             flex-grow: 1;
         }
+
         .intro {
-            margin-bottom: 40px; /* Increased space below intro */
+            margin-bottom: 40px;
         }
+
         .intro p {
-            font-size: 1.2em; /* Increased paragraph font size */
-            line-height: 1.6; /* Improved readability */
+            font-size: 1.2em;
+            line-height: 1.6;
         }
+
         .contact-button {
             display: block;
             width: 200px;
-            margin: 40px auto; /* Increased space around button */
-            padding: 15px; /* Slightly larger button */
-            background-color: #007bff;
+            margin: 40px auto;
+            padding: 15px;
+            background-color: #70543e; /* Set background to mud brown */
             color: white;
             text-align: center;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1.1em; /* Slightly larger text */
+            font-size: 1.1em;
         }
+
         footer {
             background-color: #f8f9fa;
             padding: 10px;
@@ -64,9 +134,12 @@
 </head>
 <body>
     <div class="slideshow-container">
-        <div class="slide active"><img src="/api/placeholder/1200/400" alt="Slide 1"></div>
-        <div class="slide"><img src="/api/placeholder/1200/400" alt="Slide 2"></div>
-        <div class="slide"><img src="/api/placeholder/1200/400" alt="Slide 3"></div>
+        <button class="arrow arrow-left" onclick="previousSlide()">&#10094;</button>
+        <button class="arrow arrow-right" onclick="nextSlide()">&#10095;</button>
+
+        <div class="slide active"><img src="./assets/logo.png" alt="Slide 1"></div>
+        <div class="slide"><img src="./assets/logo4.png" alt="Slide 2"></div>
+        <div class="slide"><img src="./assets/logo3.png" alt="Slide 3"></div>
     </div>
 
     <div class="content">
@@ -85,6 +158,7 @@
     <script>
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
+        let slideInterval = setInterval(nextSlide, 5000);
 
         function showSlide(n) {
             slides[currentSlide].classList.remove('active');
@@ -96,7 +170,25 @@
             showSlide(currentSlide + 1);
         }
 
-        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Pause auto-slide when user navigates manually
+        function manualNavigation() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        document.querySelector('.arrow-left').addEventListener('click', () => {
+            previousSlide();
+            manualNavigation();
+        });
+
+        document.querySelector('.arrow-right').addEventListener('click', () => {
+            nextSlide();
+            manualNavigation();
+        });
     </script>
 </body>
 </html>
